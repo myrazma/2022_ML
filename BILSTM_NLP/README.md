@@ -16,20 +16,11 @@ https://www.kaggle.com/alincijov/conll-huggingface-named-entity-recognition/data
 
 It should have to form of the following, where the first input is the word and the last input is the NER tag.
 
--DOCSTART- -X- -X- O
-
-SOCCER NN B-NP O
-- : O O
-JAPAN NNP B-NP B-LOC
-GET VB B-VP O
-LUCKY NNP B-NP O
-WIN NNP I-NP O
-, , O O
-CHINA NNP B-NP B-PER
-IN IN B-PP O
-SURPRISE DT B-NP O
-DEFEAT NN I-NP O
-. . O O
-
-Nadim NNP B-NP B-PER
-Ladki NNP I-NP I-PER
+>-DOCSTART- -X- -X- O
+>
+>SOCCER NN B-NP O  
+>JAPAN NNP B-NP B-LOC  
+>. . O O  
+>  
+>Nadim NNP B-NP B-PER  
+>Ladki NNP I-NP I-PER  
