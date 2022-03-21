@@ -1,5 +1,5 @@
 # Bi-LSTM for Named Entity Recognition (NER)
-The main focus on this model is the code for working with a Bi-LSTM. Therefore, my focus here is not on analyzing and fine-tuning the model but rather on the logic behind this method. That is also the reason I used Python only and not Jupyter Lab as the objective of this task is not the analysis but rather the code.
+The main focus on this model is the code for working with a Bi-LSTM. Therefore, my focus here is not on analyzing and fine-tuning the model but rather on the logic behind this method. That is also the reason I used a simple Python script and not Jupyter Lab as the objective of this task is not the analysis but rather the code.
 
 
 ## Model
