@@ -1,9 +1,8 @@
 # -------------------------------------
 # 
-# Python test UKP lab
 # BI-LSTM for Named Entity Recognition
-# 
-# Myra Zmarsly, Matrikel-Nr. 2602299
+#
+# Author: Myra Zmarsly
 # 
 # ------------- sources ---------------
 # 
