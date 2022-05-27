@@ -1,22 +1,11 @@
 # -------------------------------------
 # 
 # BI-LSTM for Named Entity Recognition
+# Using only PyTorch and Nupmy
 #
 # Author: Myra Zmarsly
 # 
-# ------------- sources ---------------
-# 
-# For the basic BILSTM structure and training in PyTorch: BiLSTM - Pytorch and Keras, Rahul Agarwal, 2019,
-#       url: https://www.kaggle.com/mlwhiz/bilstm-pytorch-and-keras
-# For the basic BILSTM structure and training in PyTorch: Pytorch Bidirectional LSTM example, Aladdin Persson, 2020, 
-#       video_url: https://www.youtube.com/watch?v=jGst43P-TJA
-#       url to code on github: https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/pytorch_bidirectional_lstm.py
-# BiLSTM for PoS Tagging, Ben Trevett, 2021,
-#       url: https://github.com/bentrevett/pytorch-pos-tagging/blob/master/1_bilstm.ipynb
-# For usage of pre-trained embeddings layer: Load pre-trained GloVe embeddings in torch.nn.Embedding layer… in under 2 minutes!, Tanmay Garg, 2021,
-#       url: https://medium.com/mlearning-ai/load-pre-trained-glove-embeddings-in-torch-nn-embedding-layer-in-under-2-minutes-f5af8f57416a
-# 
-# -------------------------------------
+# --------------------------------------
 
 
 import torch
@@ -144,7 +133,7 @@ def read_data(filepath):
         seq_mat, label_mat = [], []  # create data and label matrix
         sequence, labels = [], []  # create empty lists for sequences and labels
         for line in f.readlines():
-            line_ls = line.strip().split('\t')
+            line_ls = line.strip().split(' ')
 
             if len(line_ls) == 1 and line_ls[0] == '':  # end of sequence
                 if len(sequence) >= 1:
@@ -286,7 +275,8 @@ def create_labels_lookup_table(labels):
             The labels dictionary, a lookup table for tranlasting labels into ids
     """
     # make a distinct set of all labels available, make shure they are sorted, so the label idx wont change everytime
-    labels_flatten = [word_lab for seq_lab in labels for word_lab in seq_lab]  
+    labels_flatten = [word_lab for seq_lab in labels for word_lab in seq_lab] 
+    labels_flatten = labels_flatten + ['<pad-label>']  # append padding labels
     labels_distinct = sorted(set(labels_flatten))
 
     # create dictionary look up table from those labels
@@ -552,9 +542,12 @@ def run(base_dir='', do_savings=False, show_plot=False):
     # -------------------
 
     # ---- load data ----
-    train_data, train_labels = read_data(base_dir + "data/train.conll")
-    dev_data, dev_labels = read_data(base_dir + "data/dev.conll")
-    test_data, test_labels = read_data(base_dir + "data/test.conll")
+    train_data, train_labels = read_data(base_dir + "data/train.txt")
+    dev_data, dev_labels = read_data(base_dir + "data/valid.txt")
+    test_data, test_labels = read_data(base_dir + "data/test.txt")
+
+    print(len(train_data))
+    print(len(train_labels))
 
     # ---- add padding ----
     # use padding for sequences since RNN with fixed sequence size
@@ -567,7 +560,7 @@ def run(base_dir='', do_savings=False, show_plot=False):
 
     # ---- Load embeddings ----
     # downloaded here: https://nextcloud.ukp.informatik.tu-darmstadt.de/index.php/s/g6xfciqqQbw99Xw
-    embeddings, vocab_dict = read_embeddings(base_dir + 'glove.6B.50d.txt')
+    embeddings, vocab_dict = read_embeddings(base_dir + 'data/glove.6B.50d.txt')
 
     # ---- transform tokens/words to ids ----
     # get ids of tokens/words based on look up table of the embeddings
