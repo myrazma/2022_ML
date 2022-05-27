@@ -1,7 +1,7 @@
 # -------------------------------------
 # 
 # BI-LSTM for Named Entity Recognition
-# Using only PyTorch and Nupmy
+# Using only PyTorch and Numpy
 #
 # Author: Myra Zmarsly
 # 
