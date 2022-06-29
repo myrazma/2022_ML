@@ -37,7 +37,7 @@ docker build -t <docker-name> .
 and run in bash
 
 ```
-docker run --gpus all --rm -it -v "$PWD":/src <docker-name> bash
+docker run --rm -it -v "$PWD":/src <docker-name> bash
 ```
 
 to run with gpu use `--gpus all`
